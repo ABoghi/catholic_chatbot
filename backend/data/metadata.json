@@ -1,0 +1,12 @@
+{
+  "documents": {
+    "my_document.pdf": {
+      "title": "The Catechism of Saint Pope Pius X",
+      "authors": ["Saint Pope Pius X"],
+      "publisher": "The Catholic Primer",
+      "year": 2005,
+      "category": "Instructions",
+      "tier": 4
+    }
+  }
+}

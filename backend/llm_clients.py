@@ -102,11 +102,33 @@ class LocalTransformersLLM:
         self.model = model
         self._pipe = pipeline("text-generation", model=self.model, device_map="auto")
 
-    def generate(self, prompt: str, max_tokens: int = 512, temperature: float = 0.2) -> str:
-        params = {"max_new_tokens": max_tokens, "temperature": temperature, "do_sample": True}
-        out = self._pipe(prompt, **params)
-        if out and isinstance(out, list):
-            return out[0].get("generated_text", "").strip()
+    def generate(self, prompt: str, max_tokens: int = 256, temperature: float = 0.2) -> str:
+        # Truncate prompt to fit within model's max length (approx 800 tokens for GPT2's 1024 limit with generation headroom)
+        tokenizer = self._pipe.tokenizer
+        max_input_tokens = 512
+        encoded = tokenizer.encode(prompt, add_special_tokens=True)
+        if len(encoded) > max_input_tokens:
+            # Truncate to fit and re-decode
+            encoded = encoded[:max_input_tokens]
+            prompt = tokenizer.decode(encoded, skip_special_tokens=False)
+        
+        params = {
+            "max_new_tokens": max_tokens,
+            "temperature": temperature,
+            "do_sample": True,
+            "truncation": True,
+            "max_length": max_input_tokens + max_tokens,
+        }
+        try:
+            out = self._pipe(prompt, **params)
+            if out and isinstance(out, list):
+                generated_text = out[0].get("generated_text", "").strip()
+                # Remove input prompt from output if it's repeated at the start
+                if generated_text.startswith(prompt):
+                    generated_text = generated_text[len(prompt):].strip()
+                return generated_text
+        except Exception as e:
+            return f"Error generating response: {str(e)}"
         return ""
 
 

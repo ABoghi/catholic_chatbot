@@ -43,7 +43,7 @@ CHUNK_OVERLAP=200
 Place your `.pdf`, `.txt`, or `.md` files in a folder, for example `backend/data/`, and run:
 
 ```bash
-python backend/main.py ingest --source backend/data
+python -m backend.main ingest --source backend/data
 ```
 
 This will:
@@ -101,19 +101,19 @@ This sidecar file allows the ingestion pipeline to attach `tier`, `category`, `a
 ### Query the chatbot
 
 ```bash
-python main.py query "What does the Bible say about forgiveness?"
+python -m backend.main query "What does the Bible say about forgiveness?"
 ```
 
 ### Start an interactive chat session
 
 ```bash
-python main.py interactive
+python -m backend.main interactive
 ```
 
 ### List ingested files
 
 ```bash
-python main.py list-docs
+python -m backend.main list-docs
 ```
 
 ## How periodic updates work
@@ -123,7 +123,7 @@ The vector database is **persistent** — documents are stored permanently in `.
 Simply re-run the ingestion command with the folder containing your documents:
 
 ```bash
-python backend/main.py ingest --source backend/data
+python -m backend.main ingest --source backend/data
 ```
 
 The ingestion process is smart:
@@ -207,7 +207,7 @@ OLLAMA_MODEL=llama2      # model name used by Ollama or default model name
 - CLI example (query using a local HF model):
 
 ```bash
-python main.py query "What is forgiveness?" --llm-provider local --llm-model phi-4-mini
+python -m backend.main query "What is forgiveness?" --llm-provider local --llm-model phi-4-mini
 ```
 
 - Provider options:

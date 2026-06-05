@@ -266,7 +266,8 @@ def main():
 
 
 if __name__ == "__main__":
-    import json
-
+    import json, os
+    os.system("ollama serve")
+    os.system("ollama pull llama2")
     init_db()
     main()

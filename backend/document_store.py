@@ -253,11 +253,11 @@ class DocumentStore:
                     "file_name": path.name,
                     "chunk_index": i,
                     "chunk_length": len(chunk),
-                    "author": author,
-                    "publisher": publisher,
-                    "year": year,
-                    "category": category,
-                    "tier": tier,
+                    "author": author or "",
+                    "publisher": publisher or "",
+                    "year": year or "",
+                    "category": category or "",
+                    "tier": tier if tier is not None else "",
                 }
                 for i, chunk in enumerate(chunks)
             ]
@@ -284,7 +284,9 @@ class DocumentStore:
             if index_entry:
                 updated += 1
 
-        self.client.persist()
+        # Persist for older ChromaDB versions; newer versions persist automatically
+        if hasattr(self.client, 'persist'):
+            self.client.persist()
         self._save_metadata()
 
         print(f"Ingestion complete: {ingested} new/updated files, {skipped} unchanged files.")

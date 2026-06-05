@@ -1,0 +1,17 @@
+chromadb>=0.4.0
+sentence-transformers>=2.2.2
+pdfplumber>=0.10.0
+requests>=2.30.0
+python-dotenv>=1.0.0
+streamlit>=1.20.0
+langchain>=0.0.300
+transformers>=4.35.0
+torch>=2.0.0
+fastapi>=0.95.0
+uvicorn>=0.22.0
+jinja2>=3.1.0
+python-multipart>=0.0.6
+PyYAML>=6.0
+torchvision>=0.15.0
+duckdb
+chroma-migrate

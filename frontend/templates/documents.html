@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Documents</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Tier</th>
+        <th>Category</th>
+        <th>Author(s)</th>
+        <th>Publisher</th>
+        <th>Year</th>
+        <th>Inserted</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for d in documents %}
+        <tr>
+          <td>{{ d.title }}</td>
+          <td>{{ d.tier }}</td>
+          <td>{{ d.category }}</td>
+          <td>{{ d.author }}</td>
+          <td>{{ d.publisher }}</td>
+          <td>{{ d.year }}</td>
+          <td>{{ d.inserted_at }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>About</h2>
+  <p>This chatbot answers questions based on uploaded documents.</p>
+  <h3>Contact</h3>
+  <form action="/contact" method="post">
+    <input name="name" placeholder="Your name"><br>
+    <input name="email" placeholder="Your email"><br>
+    <textarea name="message" rows="4" cols="80" placeholder="Message"></textarea><br>
+    <button type="submit">Send</button>
+  </form>
+{% endblock %}

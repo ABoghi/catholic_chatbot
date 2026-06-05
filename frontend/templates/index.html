@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+  <div style="text-align: center; margin-bottom: 30px;">
+    <img src="{{ url_for('static', path='images/logo.png') }}" alt="Catholic Chatbot Logo" width="300">
+  </div>
+  
+  <h2>Ask a question</h2>
+  <form action="/query" method="post">
+    <textarea name="question" rows="4" cols="80" placeholder="Type your question here"></textarea><br>
+    <button type="submit">Ask</button>
+  </form>
+
+  {% if question %}
+    <h3>Question</h3>
+    <p>{{ question }}</p>
+    <h3>Answer</h3>
+    <pre>{{ answer }}</pre>
+  {% endif %}
+
+  <hr>
+  <h2>Support</h2>
+  <form action="/donate" method="post">
+    <input name="name" placeholder="Your name"><br>
+    <input name="amount" placeholder="Amount (e.g. 5.00)"><br>
+    <button type="submit">Donate</button>
+  </form>
+
+{% endblock %}

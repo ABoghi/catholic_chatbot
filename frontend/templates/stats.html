@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Statistics</h2>
+  <h3>Top questions</h3>
+  <table>
+    <thead><tr><th>Question</th><th>Count</th><th>Last asked</th></tr></thead>
+    <tbody>
+    {% for q,c,d in queries %}
+      <tr><td>{{ q }}</td><td>{{ c }}</td><td>{{ d }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+  <h3>Donations ({{ donation_count }} total, sum: {{ donation_sum }})</h3>
+  <table>
+    <thead><tr><th>Name</th><th>Amount</th><th>Date</th></tr></thead>
+    <tbody>
+    {% for n,a,date in donations %}
+      <tr><td>{{ n }}</td><td>{{ a }}</td><td>{{ date }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Catholic Chatbot</title>
+    <link rel="stylesheet" href="/static/style.css">
+  </head>
+  <body>
+    <header>
+      <h1>Catholic Chatbot</h1>
+      <nav>
+        <a href="/">Home</a> |
+        <a href="/documents">Documents</a> |
+        <a href="/technical">Technical</a> |
+        <a href="/stats">Stats</a> |
+        <a href="/about">About</a> |
+        <a href="/disclaimer">Disclaimer</a>
+      </nav>
+    </header>
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+    <footer>
+      <p>&copy; Catholic Chatbot</p>
+    </footer>
+  </body>
+</html>

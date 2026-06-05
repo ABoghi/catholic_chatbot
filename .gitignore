@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+
+# Chroma persistence
+chromadb/
+*.sqlite
+*.parquet
+
+# Environment
+.env

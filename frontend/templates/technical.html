@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Technical</h2>
+  <p>LLM options: {{ tech.llm_options }}</p>
+  <p>Vector store: {{ tech.vector_store }}</p>
+  <p>Embedding model: {{ tech.embedding_model }}</p>
+  <p>Code is available in the project repository; the chatbot ingests documents into ChromaDB and queries an LLM with retrieved context.</p>
+{% endblock %}

@@ -148,7 +148,14 @@ A simple web frontend is included using FastAPI. It provides a main page where u
 - Start the web app (development):
 
 ```bash
+source .venv/bin/activate
 uvicorn backend.webapp:app --reload --host 127.0.0.1 --port 8000
+```
+
+If you prefer not to activate the venv first:
+
+```bash
+./.venv/bin/uvicorn backend.webapp:app --reload --host 127.0.0.1 --port 8000
 ```
 
 - Open: `http://127.0.0.1:8000`

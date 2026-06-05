@@ -162,14 +162,14 @@ bot = Chatbot(store, llm)
 
 @app.get("/", response_class=HTMLResponse)
 def index(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse(request, "index.html", {"request": request})
 
 
 @app.post("/query", response_class=HTMLResponse)
 def query(request: Request, question: str = Form(...)):
     answer = bot.ask(question)
     record_query(question)
-    return templates.TemplateResponse("index.html", {"request": request, "question": question, "answer": answer})
+    return templates.TemplateResponse(request, "index.html", {"request": request, "question": question, "answer": answer})
 
 
 @app.post("/donate")
@@ -180,7 +180,7 @@ def donate(name: str = Form(...), amount: float = Form(...)):
 
 @app.get("/about", response_class=HTMLResponse)
 def about(request: Request):
-    return templates.TemplateResponse("about.html", {"request": request})
+    return templates.TemplateResponse(request, "about.html", {"request": request})
 
 
 @app.post("/contact")
@@ -191,13 +191,13 @@ def contact(name: str = Form(...), email: str = Form(...), message: str = Form(.
 
 @app.get("/disclaimer", response_class=HTMLResponse)
 def disclaimer(request: Request):
-    return templates.TemplateResponse("disclaimer.html", {"request": request})
+    return templates.TemplateResponse(request, "disclaimer.html", {"request": request})
 
 
 @app.get("/documents", response_class=HTMLResponse)
 def documents(request: Request):
     docs = load_documents_table()
-    return templates.TemplateResponse("documents.html", {"request": request, "documents": docs})
+    return templates.TemplateResponse(request, "documents.html", {"request": request, "documents": docs})
 
 
 @app.get("/technical", response_class=HTMLResponse)
@@ -208,7 +208,7 @@ def technical(request: Request):
         "vector_store": "ChromaDB (duckdb+parquet)",
         "embedding_model": os.getenv("EMBEDDING_MODEL", "all-MiniLM-L6-v2"),
     }
-    return templates.TemplateResponse("technical.html", {"request": request, "tech": tech})
+    return templates.TemplateResponse(request, "technical.html", {"request": request, "tech": tech})
 
 
 @app.get("/stats", response_class=HTMLResponse)
@@ -224,7 +224,7 @@ def stats(request: Request):
     cur.execute("SELECT SUM(amount) FROM donations")
     donation_sum = cur.fetchone()[0] or 0
     conn.close()
-    return templates.TemplateResponse("stats.html", {"request": request, "queries": queries, "donations": donations, "donation_count": total_donations, "donation_sum": donation_sum})
+    return templates.TemplateResponse(request, "stats.html", {"request": request, "queries": queries, "donations": donations, "donation_count": total_donations, "donation_sum": donation_sum})
 
 
 if __name__ == "__main__":

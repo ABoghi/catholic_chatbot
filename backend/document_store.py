@@ -6,7 +6,6 @@ from pathlib import Path
 import chromadb
 import pdfplumber
 import yaml
-from chromadb.config import Settings
 from sentence_transformers import SentenceTransformer
 
 from .config import (
@@ -23,9 +22,7 @@ class DocumentStore:
     def __init__(self, persist_dir=DEFAULT_CHROMA_DIR, collection_name=DEFAULT_COLLECTION_NAME):
         self.persist_dir = Path(persist_dir)
         self.persist_dir.mkdir(parents=True, exist_ok=True)
-        self.client = chromadb.Client(
-            Settings(chroma_db_impl="duckdb+parquet", persist_directory=str(self.persist_dir))
-        )
+        self.client = chromadb.PersistentClient(path=str(self.persist_dir))
         self.collection = self.client.get_or_create_collection(name=collection_name)
         self.embedding_model = SentenceTransformer(DEFAULT_EMBEDDING_MODEL)
         self.metadata_path = self.persist_dir / "document_metadata.json"

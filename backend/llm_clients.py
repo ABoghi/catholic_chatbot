@@ -45,7 +45,8 @@ class OllamaClient:
         self.host = host
         self.port = port
         self.model = model
-        self.api_url = f"http://{self.host}:{self.port}/completions"
+        # FIX 1: correct Ollama endpoint (was /completions — that's OpenAI's path)
+        self.api_url = f"http://{self.host}:{self.port}/api/generate"
 
     def generate(self, prompt: str, max_tokens: int = 1024, temperature: float = 0.2) -> str:
         try:
@@ -54,26 +55,28 @@ class OllamaClient:
                 json={
                     "model": self.model,
                     "prompt": prompt,
-                    "max_tokens": max_tokens,
-                    "temperature": temperature,
+                    "stream": False,
+                    "options": {
+                        "num_predict": max_tokens,
+                        "temperature": temperature,
+                    },
                 },
-                timeout=60,
+                timeout=120,
             )
             response.raise_for_status()
             data = response.json()
-            if isinstance(data, dict) and "text" in data:
-                return data["text"].strip()
-            if isinstance(data, dict) and "choices" in data and data["choices"]:
-                choice = data["choices"][0]
-                return choice.get("text", choice.get("message", "")).strip()
+            # /api/generate returns {"response": "..."}
+            if isinstance(data, dict) and "response" in data:
+                return data["response"].strip()
             return json.dumps(data, indent=2)
         except Exception as exc:
             return self._fallback_cli(prompt, exc)
 
     def _fallback_cli(self, prompt: str, previous_exception: Exception) -> str:
+        # FIX 2: Ollama CLI uses `run`, not `chat`; prompt is piped via stdin
         try:
             completed = subprocess.run(
-                ["ollama", "chat", self.model],
+                ["ollama", "run", self.model],
                 input=prompt,
                 text=True,
                 capture_output=True,

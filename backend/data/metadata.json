@@ -1,12 +1,12 @@
 {
   "documents": {
     "my_document.pdf": {
-      "title": "The Catechism of Saint Pope Pius X",
-      "authors": ["Saint Pope Pius X"],
+      "title": "Dogmas of the Catholic Church",
+      "authors": ["The Catholic Church"],
       "publisher": "The Catholic Primer",
-      "year": 2005,
-      "category": "Instructions",
-      "tier": 4
+      "year": 2026,
+      "category": "Ecumenical Council definitions",
+      "tier": 2
     }
   }
 }

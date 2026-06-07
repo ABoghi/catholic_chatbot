@@ -26,19 +26,20 @@ class Chatbot:
         chunks = []
         for item in contexts:
             source = item["meta"].get("source", "unknown")
-            chunk_index = item["meta"].get("chunk_index", 0)
-            chunks.append(f"Source: {source} (chunk {chunk_index})\n{item['text']}")
+            # Strip directory path, keep only filename without extension
+            source_name = Path(source).stem
+            chunks.append(f"Source: {source_name}\n{item['text']}")
         context_section = "\n\n".join(chunks)
         return (
             f"{self.system_prompt}\n\n"
-            "Context:\n"
+            "Context (use ALL of the following passages to answer):\n"
             f"{context_section}\n\n"
             "Question: "
             f"{question}\n\n"
             "Answer:"
         )
 
-    def ask(self, question: str, top_k: int = 4) -> str:
+    def ask(self, question: str, top_k: int = 6) -> str:
         contexts = self.store.query(question, top_k=top_k)
         disclaimer = (
             "I am only a chatbot and I can make mistake. Please, always seek confirmation of what I tell you to your local parish priest."

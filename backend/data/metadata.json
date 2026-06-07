@@ -1,10 +1,10 @@
 {
   "documents": {
     "my_document.pdf": {
-      "title": "The Catechism of Saint Pius X",
-      "authors": ["Saint Pius X"],
+      "title": "The Baltimore Catechism",
+      "authors": ["Father Januarius de Concilio", "Bishop John Lancaster Spalding", "Father Thomas L. Kinkead"],
       "publisher": "Catholic Primer's",
-      "year": 2005,
+      "year": 1891,
       "category": "Apostolic Constitutions",
       "tier": 3
     }

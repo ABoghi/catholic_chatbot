@@ -32,7 +32,8 @@ class Chatbot:
         context_section = "\n\n".join(chunks)
         return (
             f"{self.system_prompt}\n\n"
-            "Context (use ALL of the following passages to answer):\n"
+            "Context (use ALL of the following passages to build ONE "
+            "unified answer, do not summarise each source separately):\n"
             f"{context_section}\n\n"
             "Question: "
             f"{question}\n\n"

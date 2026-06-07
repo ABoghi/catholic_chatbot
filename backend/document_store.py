@@ -186,13 +186,14 @@ class DocumentStore:
             if path.is_file() and path.suffix.lower() in SUPPORTED_EXTENSIONS:
                 discovered_files[self._normalize_path(path, source_dir)] = path
 
-        removed = [key for key in self.file_index if key not in discovered_files]
-        for rel_path in removed:
-            entry = self.file_index.pop(rel_path, None)
-            if entry and entry.get("ids"):
-                self.collection.delete(ids=entry["ids"])
-        if removed:
-            print(f"Removed {len(removed)} deleted files from the index.")
+        #### DO NOT REMOVE FILES FROM THE VECTOR STORE ###
+        #### removed = [key for key in self.file_index if key not in discovered_files]
+        #### for rel_path in removed:
+        ####     entry = self.file_index.pop(rel_path, None)
+        ####     if entry and entry.get("ids"):
+        ####         self.collection.delete(ids=entry["ids"])
+        #### if removed:
+        ####     print(f"Removed {len(removed)} deleted files from the index.")
 
         ingested = 0
         updated = 0

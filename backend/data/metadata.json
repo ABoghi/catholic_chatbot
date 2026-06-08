@@ -1,12 +1,12 @@
 {
   "documents": {
-    "my_document.pdf": {
-      "title": "The Baltimore Catechism",
-      "authors": ["Father Januarius de Concilio", "Bishop John Lancaster Spalding", "Father Thomas L. Kinkead"],
-      "publisher": "Catholic Primer's",
-      "year": 1891,
-      "category": "Apostolic Constitutions",
-      "tier": 3
+    "03_Leviticus.pdf": {
+      "title": "Leviticus",
+      "authors": ["Moses"],
+      "publisher": "Vatican Website",
+      "year": 2002,
+      "category": "Sacred Scripture",
+      "tier": 1
     }
   }
 }

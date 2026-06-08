@@ -2,6 +2,7 @@ import hashlib
 import json
 from datetime import datetime
 from pathlib import Path
+from tabnanny import check
 
 import chromadb
 import pdfplumber
@@ -252,16 +253,17 @@ class DocumentStore:
                 {
                     "source": rel_path,
                     "file_name": path.name,
-                    "chunk_index": i,
-                    "chunk_length": len(chunk),
-                    "author": author or "",
-                    "publisher": publisher or "",
-                    "year": year or "",
-                    "category": category or "",
-                    "tier": tier if tier is not None else "",
+                    "chunk_index": int(i),
+                    "chunk_length": int(len(chunk)),
+                    "author": str(author) if author else "",
+                    "publisher": str(publisher) if publisher else "",
+                    "year": str(year) if year else "",
+                    "category": str(category) if category else "",
+                    "tier": int(tier) if str(tier).strip().isdigit() else 0,
                 }
                 for i, chunk in enumerate(chunks)
             ]
+
             embeddings = self._embed(chunks)
             self.collection.add(
                 ids=ids,

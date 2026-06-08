@@ -1,0 +1,12 @@
+{
+  "documents": {
+    "dogmas.pdf": {
+      "title": "The 255 Catholic Dogmas",
+      "authors": ["The Catholic Church"],
+      "publisher": "Vatican Press",
+      "year": 2026,
+      "category": "Infallible Magisterium",
+      "tier": 2
+    }
+  }
+}

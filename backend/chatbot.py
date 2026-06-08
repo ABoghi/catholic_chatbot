@@ -28,6 +28,7 @@ class Chatbot:
             source = item["meta"].get("source", "unknown")
             # Strip directory path, keep only filename without extension
             source_name = Path(source).stem
+            # source_name = ( item["meta"].get("title") or Path(item["meta"].get("source", "unknown")).stem )
             chunks.append(f"Source: {source_name}\n{item['text']}")
         context_section = "\n\n".join(chunks)
         return (

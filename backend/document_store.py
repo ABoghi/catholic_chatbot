@@ -252,6 +252,7 @@ class DocumentStore:
             metadatas = [
                 {
                     "source": rel_path,
+                    #"title": title,          # ADD THIS LINE
                     "file_name": path.name,
                     "chunk_index": int(i),
                     "chunk_length": int(len(chunk)),
